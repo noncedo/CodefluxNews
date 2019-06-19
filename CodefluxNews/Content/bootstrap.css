@@ -50,6 +50,28 @@
           box-sizing: border-box;
 }
 
+div.pager {
+    text-align: center;
+    margin: 1em 0;
+}
+
+    div.pager span {
+        display: inline-block;
+        width: 1.8em;
+        height: 1.8em;
+        line-height: 1.8;
+        text-align: center;
+        cursor: pointer;
+        background: #216aaf;
+        color: #fff;
+        margin-right: 0.5em;
+    }
+
+        div.pager span.active {
+            background: #e6f1fb;
+            color: #216aaf;
+        }
+
 
 .card-container.card {
     max-width: 350px;
@@ -2812,7 +2834,9 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #18BC9C;
   border-color: #18BC9C;
+
 }
+
 
 .btn-success:hover {
   color: #fff;

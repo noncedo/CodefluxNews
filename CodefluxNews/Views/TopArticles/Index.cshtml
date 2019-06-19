@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CodefluxNews.Models.selectTop8Articles_Result>
+@{
+    ViewBag.Title = "TopArticles";
+    Layout = "";
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<style>
+    p {
+        font-size:small;
+    }
+</style>
+<div class="container" style="padding-top:10px;" id="topArticles">
+    <div class="col-lg-12">
+        <div class="row" @*style="padding-top:10px;"*@>
+            @{int count = 0; }
+            @foreach (var item in Model)
+            {
+                if (count < 3)
+                {
+            <div class="col-2 card container" style="border:0px solid gray; height:auto;">
+                <div style="padding-bottom:1px">
+                    <img src="@item.Picture" alt="image" width="90" height="50" />
+                </div>
+                <h6>@item.Title</h6>
+                <p>@item.Summary</p>  
+                <p>@Convert.ToDateTime(@item.CreatedDate).ToString("dd/MM/yyyy")</p>
+             
+            </div>
+                    count++;
+                }
+            }
+
+                    <div class="col-6" style="border:0px solid gray;">
+                        
+                        <div class="row" style="padding-top:60px">  
+                            
+                                @foreach (var item in Model.Skip(count))
+                                {
+
+                                    <div class="col-2" style="padding-bottom:10px">
+                                        <img src="@item.Picture" alt="image" width="90" height="50" />
+                                    </div>
+                                    <div class="col-10" style="padding-left:20px">
+                                        @*<a href="@item.Url">*@
+                                            <h6 style="display:block;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;">
+                                                @item.Title
+                                            </h6>
+                                        @*</a>*@
+               
+                                        @*<a style="display:block;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;" href="@item.Url">@item.Summary </a>*@
+                                        <p style="display:block;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;">@item.Summary </p>
+                                    </div>
+                                }
+                           
+                        
+                        </div>
+                        </div>
+
+
+            
+
+
+
+
+

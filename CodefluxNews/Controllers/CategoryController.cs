@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CodefluxNews.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using CodefluxNews.Models;
+using PagedList;
 
 namespace CodefluxNews.Controllers
 {
@@ -11,10 +9,14 @@ namespace CodefluxNews.Controllers
     {
         NewsDBEntities db = new NewsDBEntities();
         // GET: Category
+
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.NewsCategories.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(db.NewsCategories.OrderBy(x=>x.CategoryName).ToPagedList(pageSize,pageNumber));
         }
         // GET: Category/Details/5
         public ActionResult Details(int id)

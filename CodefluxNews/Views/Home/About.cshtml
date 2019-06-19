@@ -5,3 +5,29 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+
+<html>
+    <body>
+        <iframe src="http://news.codeflux.co.za/" height="100%" width=100%></iframe>
+        <span></span>
+
+    </body>
+
+    <script>
+        const channel = new MessageChannel()
+        const display = document.querySelector('span')
+        const iframe = document.querySelector('iframe')
+
+        iframe.addEventListener('load', () => {
+            iframe.contentWindow.postMessage('Hey', '*', [channel.port2])
+        }, false)
+
+        channel.port1.onmessage = event => {
+            display.innerHTML = event.data
+        }
+    </script>
+
+
+
+

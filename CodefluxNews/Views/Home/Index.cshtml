@@ -7,13 +7,15 @@
 {
     @Html.AntiForgeryToken()
 
+    <script src="~/Scripts/moment.js"></script>
+
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
-    @*I will have to put in an ID for the item karya*@
+
     <div class="container" style="padding-top:30px">
         <div class="row">
             <div class="col-lg-12">
@@ -26,7 +28,7 @@
                                 <option value="2">Data Science</option>
                                 <option value="3">Enterprise Development</option>
                                 <option value="1">Database</option>
-                                <option value="2">Intergration</option>
+                                <option value="2">Integration</option>
                                 <option value="3">Artificial Intelligence</option>
                                 <option value="1">Cryptocurrency</option>
                                 <option value="2">Social Media Development</option>
@@ -47,7 +49,9 @@
                     </div>*@
                 <div class="masonry" id="myDiv">
                 </div>
-                <div class="loader" id="progress" style="display:none"></div>
+                <div class="loader" id="progress" style="display:none">
+
+                </div>
             </div>
 
         </div>

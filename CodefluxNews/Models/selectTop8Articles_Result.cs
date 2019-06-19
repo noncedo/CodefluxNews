@@ -11,7 +11,7 @@ namespace CodefluxNews.Models
 {
     using System;
     
-    public partial class selectNewsArticles_Result
+    public partial class selectTop8Articles_Result
     {
         public int ArticleId { get; set; }
         public string Title { get; set; }
@@ -19,7 +19,7 @@ namespace CodefluxNews.Models
         public string Name { get; set; }
         public string Picture { get; set; }
         public string Url { get; set; }
-        public string CreatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<bool> Active { get; set; }
         public string CategoryName { get; set; }
     }

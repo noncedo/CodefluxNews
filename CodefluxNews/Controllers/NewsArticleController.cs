@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CodefluxNews.Models;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CodefluxNews.Models;
+using PagedList;
 
 namespace CodefluxNews.Controllers
 {
-    
+
     public class NewsArticleController : Controller
     {
         NewsDBEntities db = new NewsDBEntities();
 
         // GET: NewsArticle
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.NewsArticles.OrderByDescending(x=>x.ArticleId).Where(x=>x.Active==true).ToList());
+           // int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(db.NewsArticles.OrderByDescending(x=>x.ArticleId).ToList());
+          
         }
 
         // GET: NewsArticle/Details/5

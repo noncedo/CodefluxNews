@@ -61,6 +61,11 @@ function monthName(dt) {
     mlist = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     return mlist[dt];
 }
+function checkDate()
+{
+    var myDate = moment.utc('/Date(1558908000000)/');
+    console.log(myDate.format('d-m-Y'));
+}
 
 function properDate(str) {
     var myDate = str.replace(/[#_/Date()]/g, '');
@@ -74,6 +79,7 @@ function properDate(str) {
 function getSimilarCategory() {
 
     //JSON data
+ 
     var url = "Home/GetCategory";
     var dataType = 'application/json; charset=utf-8';
     var data = { 'Category': getChangedCategory($('#catDropped')), "pageindex": pageIndex, "pagesize": pageSize };
@@ -90,20 +96,27 @@ function getSimilarCategory() {
                 canSendRequest();
                 for (var count = 0; count < result.length; count++) {
                     //getInfinite();
+                    //changing dates to format: 28 May 2019 from the string Date'/158900000'
+                    var myDate = moment.utc(result[count].CreatedDate);
+                    myDate.format('ddd, DD MMM YYYY');
+
+
                     resizeAllGridItems();
                     imagesHaveLoaded();
                     if (result[count].Picture !== null) {
                         if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-
+                                + '<div style="margin-left:40%">'
                                 + '<img src="' + result[count].Picture + '"/>'
-
+                                + '</div>'
                                 + '<h4>' + result[count].Title + '</h4>'
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate + '</h6>'
+                                //+ '<h6>' + moment.utc(result[count].CreatedDate) + '</h6>'
+                               // + '<h6>' + myDate.format('ddd, DD MMM YYYY') + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
@@ -120,9 +133,10 @@ function getSimilarCategory() {
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                               // + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate  + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
-                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '<h6 style="color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
                                 + '</div>'
                                 + '</div>');
@@ -134,9 +148,10 @@ function getSimilarCategory() {
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
-                            + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                            //+ '<h6>' + myDate.format('ddd, DD MMM YYYY') + '</h6>'
+                            + '<h6>' + result[count].CreatedDate + '</h6>'
                             + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
-                            + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                            + '<h6 style="color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                             + '</div>'
                             + '</div>'
                             + '</div>');
@@ -177,29 +192,35 @@ function getCategoryList() {
         dataType: 'json',
         contentType: dataType,
         data: data,
+        
         success: function (result) {
-
+           
             if (result.length !== 0) {
                 $(".noContent").hide();
                 canSendRequest();
                 for (var count = 0; count < result.length; count++) {
                     //getInfinite();
+                    var myDate = moment.utc(result[count].CreatedDate);
+                    myDate.format('ddd, DD MMM YYYY');
+                    console.log(myDate)
+
                     resizeAllGridItems();
                     imagesHaveLoaded();
                     if (result[count].Picture !== null) {
-                        if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
+                        if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Fin24" || result[count].Name === "Tech republic") {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-
+                                + '<div style="margin-left:40px">'
                                 + '<img src="' + result[count].Picture + '"/>'
-
+                                + '</div>'
                                 + '<h4>' + result[count].Title + '</h4>'
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                //+ '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate  + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
-                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '<h6 style="color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
                                 + '</div>'
                                 + '</div>');
@@ -214,14 +235,14 @@ function getCategoryList() {
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate  + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
-                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '<h6 style="color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
                                 + '</div>'
                                 + '</div>');
                         }
-                        
+
                     }
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
@@ -230,9 +251,9 @@ function getCategoryList() {
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
-                            + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                            + '<h6>' + result[count].CreatedDate  + '</h6>'
                             + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
-                            + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                            + '<h6 style="color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                             + '</div>'
                             + '</div>'
                             + '</div>');

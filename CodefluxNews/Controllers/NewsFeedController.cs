@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using CodefluxNews.Models;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CodefluxNews.Models;
 
 namespace CodefluxNews.Controllers
 {
